@@ -1,0 +1,8 @@
+char: 1
+int: 4
+short: 2
+long: 8
+float: 4
+7 digits of presision
+double: 8
+14 digits of presision

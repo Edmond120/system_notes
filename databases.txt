@@ -1,0 +1,27 @@
+Relational database
+
+	database that stores information as a collection of tables.
+
+	Field: Column data in a RDB
+
+	Record: Row in a RDB
+
+	Data can be linked between tables based on field values.
+
+SQL (Structured Query Language)
+	
+	Standard language designed to work with relational databases.
+
+	Is used for many major db programs, though the implementations may not be (mostly are not) compatible.
+
+	MySQL, PostgreSQL, SQLight, Qracle are examples of different SQL implementations.
+
+	
+	SQLite
+
+		SQL implementation that relies entirely on function calls in the parent program. There is no database server.
+
+		All database information is stored in a single file.
+		
+		Data is dynamically typed as values are inserted into a table.
+

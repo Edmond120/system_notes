@@ -1,0 +1,16 @@
+Basic C setuo
+	Source Code
+		put in .c files
+		
+		Naming convention: snake_case
+		
+		hello.c
+
+	Compiling
+		gcc hello.c
+
+		ls
+		hello.out
+
+	running
+		./hello.out

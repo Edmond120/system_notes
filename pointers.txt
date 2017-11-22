@@ -1,0 +1,32 @@
+Pointers  -
+	
+	Variables designed to store memory references
+
+
+ex.
+
+int * ip;
+char * cp;
+double * dp;
+
+size of pointers are the same
+
+9/20/17 size of poitners are 8 bytes
+
+
+& gets the address of the variable
+ex.
+
+int * ip;
+int j = 4;
+ip = &j;
+
+* get the variable the pointer is pointing to
+ex.
+
+int * ip;
+int j = 4;
+ip = &j;
+printf("%d\n",*ip);
+
+this returns 4, the value of j

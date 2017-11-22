@@ -1,0 +1,24 @@
+Manging Sub-Processes
+
+	fork() - <unistd.h>
+		Creates a separate process based on the current one,
+		the new process is called a child, the original is the parent.
+
+		The child process is a duplicate of the parent process.
+		All parts of the parent process are copied, including stack
+		and heap memory, and the file table.
+		
+		if you are the parent then fork will return the pid of the child
+		if you are the child then fork will return 0
+	
+	wait(int * status) - <unistd.h>
+
+		Stops a parent process from running until any child has provided
+		status information to the praretn via a signal. (usually the child
+		has exited).
+
+		returns the pid of the hcild that exited, or -1 (errno)
+
+		wait( int * status )
+			The parameter (status) is used to store informaiton about
+			how the process exited.

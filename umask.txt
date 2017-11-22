@@ -1,0 +1,18 @@
+umask - <sys/stat.h>
+	Set the file creation permission mask
+
+	By default, created files are not given the exact permissions provided in the mode argument to open. Some permissions are automatically shut off.
+
+	Umask is applied the following way:
+		
+		new_permissions = ~mask & mode
+	
+	The default mask is 0002.
+
+	umask ( <MASK> );
+		you can define the umask using a 3 digit octal #
+
+		umask(0000);
+
+0777 = all permissions
+

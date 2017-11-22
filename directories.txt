@@ -1,0 +1,5 @@
+Directories
+
+	A *nix directory is a file containing the names of the files within the directory along with basic information like a file type.
+
+	Moving files into/out of a directroy means chaning the directory file, not acutally moving any data.

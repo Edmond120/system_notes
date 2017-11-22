@@ -1,0 +1,36 @@
+you can combine multiple c files into a c program by including them all in one gcc command. ex 
+	gcc test.c string.c foo.c woohoo.c
+
+you cannot have duplicate function or global variable names across these files.
+
+There must be a main function in order to create an executable program.
+
+gcc -c
+
+	will compile a c file into a .o fil, it is not a fully functional program, but it is compiled code.
+
+	Do this to compile a .c file that does not contain a main() function.
+
+.o files can be linked together with each other or .c files through gcc
+
+
+
+Make
+	Create compiling instructions and setup dependencies.
+
+	standard name for the file is makefile
+
+	syntax:
+		<TARGET>; <DEPENDENCIES>
+		TAB<RULES>
+
+example of a make file:
+
+
+----------------------------------------------
+strtest: dwstring.o main.o
+	gcc -o strtest dwstring.o main.o
+
+dwstring.o: dwstring.c dwstring.h
+	gcc -c dwstring.c
+----------------------------------------------

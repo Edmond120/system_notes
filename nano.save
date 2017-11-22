@@ -1,0 +1,382 @@
+Bitwise Operators
+	
+	Evaluated on each individual bit of a value.
+	>> right shift
+		ex. x >> 1
+		Move all bits to the right, add 0s in the front
+	<<left shift
+		ex. x << 1
+		
+		Move all bits to the left, add 0s in the back
+	~ negation
+		ex. ~x
+		Flip every bit
+	| or
+		ex: a | b
+		
+		perform or for each pair of bits in (a,b)
+	& and
+		ex: a & b
+	
+		perform and for each pair of bits in (a,b)
+	
+	^ xor
+		ex: a ^ b
+		
+		perform xor for each pair of bits in (a,b) Command line Arguments:
+	int main(int argc, char * argv[])
+	program name is considered the frist command line argument
+	argc
+		number of command line arguments
+	argv
+		array of command line arguments Basic C setuo
+	Source Code
+		put in .c files
+		
+		Naming convention: snake_case
+		
+		hello.c
+	Compiling
+		gcc hello.c
+		ls
+		hello.out
+	running
+		./hello.out you can combine multiple c files into a c program by including them all in one gcc command. ex
+	gcc test.c string.c foo.c woohoo.c you cannot have duplicate function or global variable names across these files. There must be a main function in order 
+to create an executable program. gcc -c
+	will compile a c file into a .o fil, it is not a fully functional program, but it is compiled code.
+	Do this to compile a .c file that does not contain a main() function. .o files can be linked together with each other or .c files through gcc Make
+	Create compiling instructions and setup dependencies.
+	standard name for the file is makefile
+	syntax:
+		<TARGET>; <DEPENDENCIES>
+		TAB<RULES> example of a make file: ---------------------------------------------- strtest: dwstring.o main.o
+	gcc -o strtest dwstring.o main.o dwstring.o: dwstring.c dwstring.h
+	gcc -c dwstring.c ---------------------------------------------- Relational database
+	database that stores information as a collection of tables.
+	Field: Column data in a RDB
+	Record: Row in a RDB
+	Data can be linked between tables based on field values. SQL (Structured Query Language)
+	
+	Standard language designed to work with relational databases.
+	Is used for many major db programs, though the implementations may not be (mostly are not) compatible.
+	MySQL, PostgreSQL, SQLight, Qracle are examples of different SQL implementations.
+	
+	SQLite
+		SQL implementation that relies entirely on function calls in the parent program. There is no database server.
+		All database information is stored in a single file.
+		
+		Data is dynamically typed as values are inserted into a table. char: 1 int: 4 short: 2 long: 8 float: 4 7 digits of presision double: 8 14 digits 
+of presision Directories
+	A *nix directory is a file containing the names of the files within the directory along with basic information like a file type.
+	Moving files into/out of a directroy means chaning the directory file, not acutally moving any data. Dynamic memory allocation
+	
+	malloc(size_t x)
+		Allocates x vytes of meory (from the heap)
+		Returns the address at the begnning of the allocation
+	
+		Returns a void *, always typecast to the correct pointer type.
+		
+		int *p;
+		p = (int *)malloc( 5 * sizeof(int)); `
+	free
+		Releases dynamically allocated memory.
+	
+		Takes one parameter, a pointer to the beginnning of a dynamically allocated block of memory.
+		Every call to malloc/calloc should have a corresponding call to free
+		int *p;
+		p = (int *)malloc( 20 );
+		free(p);
+	
+	calloc(size_t n, size_t x)
+		Allocates n * x bytes of memory
+		
+		Ensures that each bit is set to 0
+		Works like malloc in all other ways
+		int *p;
+		p = (int *)calloc(5, sizeof(int));
+		
+	realloc(void *p, sizwe_t x)
+		Change the amount oif memory allocated to a given block.
+		Like free, p must point to the beginning of a block.
+		If x is smaller than the original size of the allocation, the extra bytes will be release.
+		If x is larger than the original size than either:
+		1) if there is enough space at the end of the orgioinal allocation, the orginal allocation will be updated.
+		
+		or
+	
+		2)If there is not enough space, a new allocation will be created, containing all the original values (copied over). The original allocation will 
+be freed.
+		int *p;
+		p = (int *) malloc(20);
+		p = (int *) realloc( p, 40); The exec family - <unistd.h>
+	There are a number of c functions that can be sued to run other programs
+	from within
+	Replaces the current process with the new program.
+	execlp(const char *file, const char *arg,...)
+		last argument must be NULL
+	execvp(const char *file,const char * arg[])
+		takes different arguments
+	
+	execv(const char *file,const char * arg[])
+		same as execvp except it requires the absolute path File permissions
+	3 types of permissions
+		read,write,execute
+	Permissions can be represented as 3-digit binary #s
+	or 1-digit octal #s
+		100 <==> 4 => read only
+		111 <==> 7 => read,write,execute
+	There are 3 permission "areas"
+		user,group,others
+		Each area can have its own permissions:
+		
+		0644 => user: read + write, group: read, other: read File Table
+	A list of all files being used by a program while it is running.
+	Contains basic information like the file's location and size.
+	The file table has a limited size, which is a power of 2 and commonly 256. getdtablesize() will return this value
+	
+	Each file is given an integer index, starting at 0, this is referred to as the file descriptor
+	There are 3 files always open in the table:
+		0 or STDIN_FILENO: stdin
+		1 or STDOUT_FILENO: stdout
+		2 or STDERR_FILENO: stderr open - <fntil.h>
+	Add a file to the file table and returns its file descriptor
+	If open fails, -1 is returned, extra error information can be forund in errno.
+		errno is an int variable that can be found in <errno.h>, using sterror (in string.h) on errno will return a string description of the error
+	open( <PATH>, <FLAGS>, <MODE>)
+	
+	mode
+		Only used when creating a file. Set the new file's permissions using a 3 digit octal #
+	flags
+		Determine what you plan to do with the file.
+			O_RDONLY Open the file so that it is read only.
+			O_WRONLY Open the file so that it is write only.
+			O_RDWR Open the file so that it can be read from and written to.
+			O_APPEND Append new information to the end of the file.
+			O_TRUNC Initially clear all data from the file.
+			O_CREAT If the file does not exist, create it. If the O_CREAT option is used, then you must include the third parameter.
+			O_EXCL Combined with the O_CREAT option, it ensures that the caller must create the file. If the file already exists, the call will fail.
+	Each flag is a number, to combine flags we use bitwise OR
+		O_WRONLY = 1 00000001
+		O_APPEND = 8 00001000
+		O_WRONLY | O_APPEND = 00001000 close(int fd) - <unistd.h>
+	takes af file descriptor and removes fd from the file table
+	returns 0 if successful and -1 of it fails(as well as setting errno) read <unistd.h>
+	read in data from a file
+	read(,,)
+	read(fd,buff,n)
+	read n bytes from the file at fd in the file table and put that data in the buffer
+	buff must be a pointer
+	returns the number of bytes actually read. returns -1 and sets errno if unsuccessful write <unistd.h>
+	wrtie data to a file, reverse of read
+	returns the number of bytes writtem pr -1 and sets errno if unsuccessful lseek - <unistd.h>
+	Set hte current position in an open file
+	lseek(<FILE DRESCPTORS,<OFFSET>,<WHENCE>)
+	offset
+		Number of bytes to mvoe the position by. can be negative.
+	whence
+		Where to measure the offset from
+	SEEK_SET
+		offset is evaluated from the beginning of the file
+	SEEK_CUR
+		offset is relative to the current position in the file
+	SEEK_END
+		offset is evaluated from the end of the file
+	
+	Returns the number of bytes the current position is from the beginning of the file, or -1 (errno) stat - <sys/stat.h>
+	get infomation about a file (metadata)
+	
+	stat(<PATH>, <STAT BUFFER>)
+		struct stat sb;
+		stat("foo",&sb);
+	STAT BUFFER
+		Must be a pointer to a struct stat
+		All the file inforamtion gets put into the stat buffer.
+		Some of the fields in struct stat:
+		
+			st_size
+				file size in bytes
+			st_uid, st_gid
+				user id group id
+			st_mode
+				file permissions
+			st_atime, st_mtime
+				last access, last modification
+			
+				These are time_t variables. We can use functions in time.h to make sense of them
+				ctime( <TIME> )
+					TIME is type time_t *
+					returnsw the time as a string opendir - <dirent.h>
+	Open a directory file
+	This will not change the current working directory (cwd), it only allows your program to read the contents of the directroy file
+	opendir( <path> );
+	Returns a pointer to a directroy stream (DIR *) closedir - <dirent.h>
+	Closes the direcory stream and frees the poitner associated with it.
+	closedir( <DIRECTORY STREAM *> ) readdir - <dirent.h>
+	readdir( < DIRECTROY STREAM *> )
+	
+	Returns a pointer to he nnext entry in a directroy stream, or Null if all entries havea already been returned. int %d long %ld float %f double %lf %0.<x>f 
+will provide x digits after the floating point char %c char array %s pointer %p special integer formatting characters octal integer %o hexadecimal integer %x Pult 
+system libraries inside <>
+#include <stdio.h>
+scanf - <stdio.h>
+	scanf( <FORMAT STRING>, <VAR 1>, <VAR 2> ...)
+	Reads in data from stdin using the format string to determine types.
+	Puts the data in each variable.
+	Variables must be poitners
+	example
+		int x; float f; double d;
+		scanf("%d %f %lf",&x,&f,&d);
+		
+		expected input:1 0.1 0.1
+		note that if you put spaces in scanf then it would expect spaces in your input fgets - <stdio.h>
+		Read in from a fiel stream and store it in a string
+		fgets( <DESTINATION> , <BYTES>, <FILE POINTER>)
+		fgets( s, n, f);
+			Reads at most n-1 characters from file stream f and stroes it in s.
+		File pointer
+	
+			FILE * type, more complex than a file descriptor
+		
+			stdin is a FILE * variable
+		Stops at newline, end of file, or the byte limit.
+		If applicable, keeps the newline character as part of the string,
+		appends NULL after
+		fgets(s, 256,stdin)
+			read a line of text from standard in sscanf - <stdio.h>
+	Scan a string and extract values based on a format string.
+	sscanf(<SOURCE STRING>, <FORMAT STRING>, <VAR 1>, <VAR 2>...) you can define native integers in bases 2, 8 and 16 by using the following prefixes
+	0b : binary
+	0 : ocatal
+	0x : hexadecimal
+	ex.
+	
+	int b = ob11010:
+	int o = 0121;
+	int x = 0xb2;
+	
+	THIS DOES NOT CHANGE THE VALUE
+	these numbers are still integers, they are just written differently. Pointers -
+	
+	Variables designed to store memory references ex. int * ip; char * cp; double * dp; size of pointers are the same 9/20/17 size of poitners are 8 bytes & 
+gets the address of the variable ex. int * ip; int j = 4; ip = &j; * get the variable the pointer is pointing to ex. int * ip; int j = 4; ip = &j; 
+printf("%d\n",*ip); this returns 4, the value of j Processes
+	Every running program is a process. A process can create subproccesses,
+	but theses are no different from regualr processes.
+	A processor can handle 1 process per cycle (per core).
+	"Multitasking" appears to happen because the processor switches
+	between all the active processes quickly.
+	pid
+		Every process has a pid
+# system_notes
+Signals
+	Limited way of sending information to a porcess.
+	Sends an integer value to a process.
+	
+	kill
+		Command line utility to send a signal to a process
+		$kill <PID>
+			Sends signal 15 (SIGTERM) to PID
+	killall [-<SIGNAL>] <PROCESS>
+		sends signal to all processes with the same process name as <PROCESS> c functions
+	Signal handling in c programs <signal.h>
+	kill(<PID>, <SIGNAL>)
+		returns 0 on success or -1 (errno) on failure
+	
+	sighandler(<SIGNAL>)
+		To intercept signals in a c program you must create
+		a signal handling function.
+		Some signals (like SIGKILL) cannot be cauthg.
+		static void sighandler( int signo )
+		Must be static, must be void, must take a single int parameter
+		static: the function can only be called from within
+		 the file it is defined. (where your main is)
+	
+	How to use:
+		static void sighandler( int signo){
+			//do stuff
+		}
+		int main(){
+			signal(<SOME SIGNAL>,sighandler);
+		}
+	
+	exit()-
+		exits the program.
+#include<stdio.h>
+int evenDevisiable(num){
+}
+int main(){
+	int num = 1;
+	while(evenDivisiable(num) == 0){
+		num++;
+	}
+	printf("smallest positive number evenly divisiable by 1-20 %d\n",num);
+}
+Stack memory vs Heap memory
+	Computer programs separate memory usage into two parts:
+	stack and heap.
+	Every program can have its own stack and heap.
+	Stack memory
+		Stores all normally declared variables (including pointers and structs), arrays and function calls;
+		Functions are pushed onto the stack in the order they are called, and popped off when completed.
+	
+		When a function is popped off the stack, the stack memory associated with it is released.
+	
+	
+	Heap memory
+		Stores dynamically allocated memory.
+		**Data will remain in the heap until it is released.**
+			(or the program terminates)
+	
+		Can be accessed through pointers.
+	
+		Can be accessed accross many functions. Strings are character arrays By convention, strings end with a null character (either '' or 0 or '\0') 
+When you make a literal string using "", an immutable string is created in memory. These strings are automatically null terminated. All references to the same 
+literal string refer to the same immutable string in memory. Declaring Strings
+	char s[256];
+		Normal array declaration, allocates 256 bytes. Struct
+	Create a new type that is a collection of values.
+	struct {int a; char x; } s;
+		Here, s is a variable of type:
+			struct { int a; char x; }
+	you will have to retype the entire thing to make an new variable of the same type.
+	ex:
+	struct {int a; char x;} s;
+	struct {int a; char x;} s2;
+	struct {
+		int a;
+		char x;
+	};
+	
+	unless you prototype
+	ex:
+	struct foo { int a; char x;};
+		Here, struct foo is a prototype for the kind if struct to be used later:
+	
+	struct foo s;
+	struct foo s2;
+	
+	you can also declare a struct and prototype it at the same time
+	ex:
+	struct foo { int a; char x;} s;
+	struct foo s2;
+	we use the . operator to access a value inside a struct
+		s.a = 10;
+		s.x - '@'; in c the number 0 is false any other number is true typedef
+	Provide a new name for an existing data type.
+	
+	typedef <real type> <new name>;
+	ex:
+		typedef unsigned long size_t;
+		size_t x = 139; //x is really an unsigned long typedef does not declare a new data type. umask - <sys/stat.h>
+	Set the file creation permission mask
+	By default, created files are not given the exact permissions provided in the mode argument to open. Some permissions are automatically shut off.
+	Umask is applied the following way:
+		
+		new_permissions = ~mask & mode
+	
+	The default mask is 0002.
+	umask ( <MASK> );
+		you can define the umask using a 3 digit octal #
+		umask(0000); 0777 = all permissions if you declared any variable type as "unsigned" then the variable can not be negative but will have its 
+positive ranged extended ex. unsigned char x; 0 <= x <= 255 signed char x; -128 <= 127

@@ -1,0 +1,53 @@
+Dynamic memory allocation
+	
+	malloc(size_t x)
+		Allocates x vytes of meory (from the heap)
+
+		Returns the address at the begnning of the allocation
+	
+		Returns a void *, always typecast to the correct pointer type.
+		
+		int *p;
+		p = (int *)malloc( 5 * sizeof(int));
+`	
+	free
+		Releases dynamically allocated memory.
+	
+		Takes one parameter, a pointer to the beginnning of a dynamically allocated block of memory.
+
+		Every call to malloc/calloc should have a corresponding call to free
+
+		int *p;
+		p = (int *)malloc( 20 );
+		free(p);
+	
+	calloc(size_t n, size_t x)
+		Allocates n * x bytes of memory
+		
+		Ensures that each bit is set to 0
+
+		Works like malloc in all other ways
+
+		int *p;
+
+		p = (int *)calloc(5, sizeof(int));
+		
+	realloc(void *p, sizwe_t x)
+
+		Change the amount oif memory allocated to a given block.
+
+		Like free, p must point to the beginning of a block.
+
+		If x is smaller than the original size of the allocation, the extra bytes will be release.
+
+		If x is larger than the original size than either:
+
+		1) if there is enough space at the end of the orgioinal allocation, the orginal allocation will be updated.
+		
+		or
+	
+		2)If there is not enough space, a new allocation will be created, containing all the original values (copied over). The original allocation will be freed.
+
+		int *p;
+		p = (int *) malloc(20);
+		p = (int *) realloc( p, 40);

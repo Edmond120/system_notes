@@ -1,0 +1,11 @@
+typedef
+	Provide a new name for an existing data type.
+	
+	typedef <real type> <new name>;
+
+	ex:
+		typedef unsigned long size_t;
+		size_t x = 139; //x is really an unsigned long
+
+typedef does not declare a new data type.
+

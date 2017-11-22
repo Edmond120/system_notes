@@ -1,0 +1,11 @@
+Command line Arguments:
+
+	int main(int argc, char * argv[])
+
+	program name is considered the frist command line argument
+
+	argc
+		number of command line arguments
+
+	argv
+		array of command line arguments

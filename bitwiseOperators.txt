@@ -1,0 +1,33 @@
+Bitwise Operators
+	
+	Evaluated on each individual bit of a value.
+
+	>> right shift
+		ex. x >> 1
+
+		Move all bits to the right, add 0s in the front
+
+	<<left shift
+		ex. x << 1
+		
+		Move all bits to the left, add 0s in the back
+
+	~ negation
+		ex. ~x
+
+		Flip every bit
+
+	| or
+		ex: a | b
+		
+		perform or for each pair of bits in (a,b)
+
+	& and
+		ex: a & b
+	
+		perform and for each pair of bits in (a,b)
+	
+	^ xor
+		ex: a ^ b
+		
+		perform xor for each pair of bits in (a,b)

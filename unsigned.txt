@@ -1,0 +1,10 @@
+if you declared any variable type as "unsigned" then the variable can not be negative but will have its positive ranged extended
+ex.
+
+unsigned char x;
+0 <= x <= 255
+
+
+signed char x;
+-128 <= 127
+

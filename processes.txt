@@ -1,0 +1,11 @@
+Processes
+	Every running program is a process. A process can create subproccesses,
+	but theses are no different from regualr processes.
+
+	A processor can handle 1 process per cycle (per core).
+
+	"Multitasking" appears to happen because the processor switches
+	between all the active processes quickly.
+
+	pid
+		Every process has a pid

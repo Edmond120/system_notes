@@ -1,0 +1,46 @@
+Signals
+
+	Limited way of sending information to a porcess.
+
+	Sends an integer value to a process.
+	
+	kill
+		Command line utility to send a signal to a process
+
+		$kill <PID>
+			Sends signal 15 (SIGTERM) to PID
+
+	killall [-<SIGNAL>] <PROCESS>
+		sends signal to all processes with the same process name as <PROCESS>
+
+c functions 
+
+	Signal handling in c programs <signal.h>	
+
+	kill(<PID>, <SIGNAL>)
+		returns 0 on success or -1 (errno) on failure
+	
+	sighandler(<SIGNAL>)
+		To intercept signals in a c program you must create
+		a signal handling function.
+
+		Some signals (like SIGKILL) cannot be cauthg.
+
+		static void sighandler( int signo )
+
+		Must be static, must be void, must take a single int parameter
+
+		static: the function can only be called from within
+		 the file it is defined. (where your main is)
+
+	
+	How to use:
+		static void sighandler( int signo){
+			//do stuff
+		}
+		int main(){
+			signal(<SOME SIGNAL>,sighandler);
+		}
+	
+	exit()-
+		exits the program.

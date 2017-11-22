@@ -1,0 +1,12 @@
+Strings are character arrays
+
+By convention, strings end with a null character
+(either '' or 0 or '\0')
+
+When you make a literal string using "", an immutable string is created in memory. These strings are automatically null terminated.
+
+All references to the same literal string refer to the same immutable string in memory.
+
+Declaring Strings
+	char s[256];
+		Normal array declaration, allocates 256 bytes. 

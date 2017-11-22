@@ -1,0 +1,17 @@
+File permissions
+
+	3 types of permissions
+		read,write,execute
+
+	Permissions can be represented as 3-digit binary #s
+	or 1-digit octal #s
+
+		100 <==> 4 => read only
+		111 <==> 7 => read,write,execute
+
+	There are 3 permission "areas"
+		user,group,others
+
+		Each area can have its own permissions:
+		
+		0644 => user: read + write, group: read, other: read

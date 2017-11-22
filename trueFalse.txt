@@ -1,0 +1,3 @@
+in c the number 0 is false
+
+any other number is true

@@ -1,0 +1,15 @@
+you can define native integers in bases 2, 8 and 16
+by using the following prefixes
+
+	0b : binary
+	0  : ocatal
+	0x : hexadecimal
+
+	ex.
+	
+	int b = ob11010:
+	int o = 0121;
+	int x = 0xb2;
+	
+	THIS DOES NOT CHANGE THE VALUE
+	these numbers are still integers, they are just written differently.

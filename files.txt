@@ -1,0 +1,130 @@
+File Table
+	A list of all files being used by a program while it is running.
+
+	Contains basic information like the file's location and size.
+
+	The file table has a limited size, which is a power of 2 and commonly 256. getdtablesize() will return this value
+	
+	Each file is given an integer index, starting at 0, this is referred to as the file descriptor
+
+	There are 3 files always open in the table:
+		0 or STDIN_FILENO: stdin
+		1 or STDOUT_FILENO: stdout
+		2 or STDERR_FILENO: stderr
+
+open - <fcntl.h>
+	Add a file to the file table and returns its file descriptor
+
+	If open fails, -1 is returned, extra error information can be forund in errno.
+
+		errno is an int variable that can be found in <errno.h>, using sterror (in string.h) on errno will return a string description of the error
+
+	open( <PATH>, <FLAGS>, <MODE>)
+	
+	mode
+		Only used when creating a file. Set the new file's permissions using a 3 digit octal #
+
+	flags
+		Determine what you plan to do with the file.
+			O_RDONLY 	Open the file so that it is read only.
+			O_WRONLY 	Open the file so that it is write only.
+			O_RDWR 	Open the file so that it can be read from and written to.
+			O_APPEND 	Append new information to the end of the file.
+			O_TRUNC 	Initially clear all data from the file.
+			O_CREAT 	If the file does not exist, create it. If the O_CREAT option is used, then you must include the third parameter.
+			O_EXCL 	Combined with the O_CREAT option, it ensures that the caller must create the file. If the file already exists, the call will fail.
+
+	Each flag is a number, to combine flags we use bitwise OR
+
+		O_WRONLY = 1 00000001
+		O_APPEND = 8 00001000
+		O_WRONLY | O_APPEND = 00001000
+
+close(int fd) - <unistd.h>
+	takes af file descriptor and removes fd from the file table
+	returns 0 if successful and -1 of it fails(as well as setting errno)
+
+read <unistd.h>
+	read in data from a file
+	read(,,)
+	read(fd,buff,n)
+	read n bytes from the file at fd in the file table and put that data in the buffer
+	buff must be a pointer 
+	returns the number of bytes actually read. returns -1 and sets errno if unsuccessful
+
+write <unistd.h>
+	wrtie data to a file, reverse of read
+	returns the number of bytes writtem pr -1 and sets errno if unsuccessful
+
+lseek - <unistd.h>
+	Set hte current position in an open file
+	lseek(<FILE DRESCPTORS,<OFFSET>,<WHENCE>)
+
+	offset
+		Number of bytes to mvoe the position by. can be negative.
+
+	whence
+		Where to measure the offset from
+	SEEK_SET
+		offset is evaluated from the beginning of the file
+	SEEK_CUR
+		offset is relative to the current position in the file
+	SEEK_END
+		offset is evaluated from the end of the file
+	
+	Returns the number of bytes the current position is from the beginning of the file, or -1 (errno)
+
+stat - <sys/stat.h>
+
+	get infomation about a file (metadata)
+	
+	stat(<PATH>, <STAT BUFFER>)
+		struct stat sb;
+		stat("foo",&sb);
+
+	STAT BUFFER
+
+		Must be a pointer to a struct stat
+
+		All the file inforamtion gets put into the stat buffer.
+
+		Some of the fields in struct stat:
+		
+			st_size
+				file size in bytes
+
+			st_uid, st_gid
+				user id group id
+
+			st_mode
+				file permissions
+			st_atime, st_mtime
+				last access, last modification
+			
+				These are time_t variables. We can use functions in time.h to make sense of them
+
+				ctime( <TIME> )
+					TIME is type time_t *
+
+					returnsw the time as a string
+opendir - <dirent.h>
+
+	Open a directory file
+
+	This will not change the current working directory (cwd), it only allows your program to read the contents of the directroy file
+
+	opendir( <path> );
+
+	Returns a pointer to a directroy stream (DIR *)
+
+closedir - <dirent.h>
+
+	Closes the direcory stream and frees the poitner associated with it.
+
+	closedir( <DIRECTORY STREAM *> )
+
+readdir - <dirent.h>
+
+	readdir( < DIRECTROY STREAM *> )
+	
+	Returns a pointer to he nnext entry in a directroy stream, or Null if all entries havea already been returned.

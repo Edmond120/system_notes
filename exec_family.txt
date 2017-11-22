@@ -1,0 +1,15 @@
+The exec family - <unistd.h>
+
+	There are a number of c functions that can be sued to run other programs
+	from within
+
+	Replaces the current process with the new program.
+
+	execlp(const char *file, const char *arg,...)
+		last argument must be NULL
+
+	execvp(const char *file,const char * arg[])
+		takes different arguments 
+	
+	execv(const char *file,const char * arg[])
+		same as execvp except it requires the absolute path
