@@ -1,0 +1,28 @@
+#
+	Used to provide preprocessor instructions
+
+	These directives are handled by gcc first
+
+	#include <LIBRARY> | "LIBRARY"
+		link libraries to your code
+	
+	#define <NAME> <VALUE>
+		replace all occurances of Name with Value
+
+		ex. #define TRUE 1
+			convention is that the name is written in all caps
+
+	marcos:
+		#define SQUARE(x) x * x
+				NAME      VALUE
+		...
+		int y = SQUARE(9); ==> int y = 9 * 9
+	
+		#define MIN(X, Y) x < y ? x : y
+
+	conditional statement:
+		#ifndef <IDENTIFIER>
+		<CODE>
+		#endif
+
+	If the identifier has been defined, ignore all the code up until the endif statement.

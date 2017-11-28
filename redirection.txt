@@ -1,0 +1,58 @@
+File Redirection
+	Command line redirection
+		>
+			Redirects stdout to a file
+
+			Overwrites the conetents of the file
+
+			<COMMAND> > <FILE>
+		
+			ls > file_list
+
+		>>
+			Redirects stdout to a file by appending
+
+		1> 
+			Redirects stdout to a file 
+			
+			overwrites the file (1>> appends)
+
+		2>
+			Redirects stderr to a file
+
+			overwrites the file (2>> appends)
+
+		cuz 1 is stdout in the file table and 2 is stderr in the file table
+
+		&>
+			Redirect stdout and stderr
+	
+			(&>> appends)
+	
+		< 
+			Redirects stdin from a file
+
+		| (pipe)
+			Redirect stdout from one command to stdin of the next
+	
+		ls | wc
+
+		
+Redirection in c programs
+	
+	dup - <unistd.h>
+	
+		Duplicates an existing entry in the file table.
+
+		Returns a new file descriptor for the duplicate entry.
+
+		dup( fd )
+			returns the new file descriptor
+
+	dup2 - <unistd.h>
+	
+		dup2( fd1, fd2 )
+			
+			Redirects fd2 to fd1
+
+			Duplicates the behavior for fd1 at fd2
