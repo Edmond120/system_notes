@@ -1,0 +1,59 @@
+Shared Memory
+	<sys/shm.h>, <sys/ipc.h>, <sys/types.h>
+	
+	A segment of heap memory that can be accessed by multiple processes.
+	
+	Shared memory is accessed via a key that is known by any process that
+	needs to access it.
+
+	Shared memory does not get released when a program exits.
+
+
+	5 Shared memory operations
+	
+		Create the segment (happens once)
+	
+		Access the segment (happens once per process)
+
+		Attach the segment to a variable (once per process)
+
+		detach the segment from a variable (once per process)
+
+		Remove the segment (happens once)
+
+
+	shmget
+		
+		Create or access a shared memory segment
+
+		Returns a shared memory descriptor (similar comcept to a file descriptor),
+		or -1 if it fails. (errno)
+
+		shmget( key, size, flags)
+
+			key
+				Uniquge integer identifier for the shared memory segment
+				(like a file name)
+			size
+				How much memory to request (bytes)
+			flags
+				Includes permissions for the segment, combined with bitwise or
+
+				IPC_CREAT: Create the segment
+					If segment is new, will set value to all 0s
+
+				IPC_EXCL: Fail if the segment already exists and IPC_CREAT is on
+		shmat
+			
+			Attach a shared memory segment to a variable
+
+			Returns a pointer tothe segment or -1(errno).
+			
+			shmat(desciptor, address, flags)
+			
+				descriptor
+					The return value of shmget
+				address
+					If 0, the OS will provide the appropriate address
+				flags
+					usually 0, there is one useful flag
