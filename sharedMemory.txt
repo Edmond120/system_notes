@@ -57,3 +57,33 @@ Shared Memory
 					If 0, the OS will provide the appropriate address
 				flags
 					usually 0, there is one useful flag
+		
+		shmdt
+
+			Detach a variable from a shared memory segment.
+			Returns 0 upon success or -1 upon failure.
+			
+			shmdt( pointer )
+
+				pointer
+					The address used to access teh segment
+
+		shmctl
+			
+			Perform operations on the shared memory segment
+
+			each shared memory segment has metatdate that can be stored in a struct (struct shmid_ds)
+
+			some of that data stored: last access, size, pid of creator, pid of last modification
+	
+			shmctl( descriptor, command, buffer )
+
+				descriptor
+					Return value of shmget
+
+				commands:
+					IPC_RMID: Remove a shared memory segment
+					
+					IPC_STAT: populate the buffer(struct shmid_ds *) with segmetn metadata
+
+					IPC_SET: set some of the segment metadata from buffer
