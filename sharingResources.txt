@@ -1,0 +1,63 @@
+Semaphores
+	created by Edsger Dijkstra
+	
+	IPC construct used to control access to a shared resource (like a file or
+	shared memory).
+
+	Most commonly, a semaphore is used as a counter representing how many processes
+	can access a resoucre at a given time.
+
+		If a semaphore has a value of 3, then it can have 3 active "users".
+		
+		If a semaphore has a value of 0, then it is unavaliable.
+
+	Most semaphore operations are "atomic", meaning they will not be split up into
+	multiple processor instructions.
+
+Semaphore operations
+
+	Create a semaphore
+
+	Set an initial value
+
+	Remove a semaphore
+
+	Up(S) / V(S) - atomic
+		Releases the semaphore to signal you are done with its associated resource
+
+		Pseudocode
+			S++
+
+	Down(S) / P(S) - atomic
+		Attempt tp take the semaphore.
+		
+		If the semaphore is 0, wait for it to be avaliable
+
+			Pseudocode
+				while (S == 0) { block } S--;
+
+Semaphores in C
+	<sys/types.h> <sys/ipc.h> <sys/sem.h>
+
+	semget
+		Create/Get access to a semaphore.
+
+		This is not the same as Up(S) or Down(S). it does not modify the semaphore
+
+		Returns a semaphore descriptor or -1 (errno)
+
+		semget( <KEY>, <AMOUNT>, <FLAGS> )
+		
+			KEY
+				Unique semaphroe identifier.
+		
+			AMOUNT
+				Semaphores are stored as asets of one or more. The number of
+				semaphores to create/get in the set
+
+			FLAGS
+				Includes permissions for the semaphore, combine with bitwise or
+
+				IPC_CREAT: create the semaphore and set value to 0
+
+				IPC_EXCL: Fail if the semaphore already exists and IPC_CREAT is on
