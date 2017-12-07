@@ -1,0 +1,7 @@
+union?
+
+	A c structure designed to hold only one value at a time from a group of
+	potential value
+
+	Just large enough to hold the largest piece of data it could potentially
+	contain.

@@ -61,3 +61,28 @@ Semaphores in C
 				IPC_CREAT: create the semaphore and set value to 0
 
 				IPC_EXCL: Fail if the semaphore already exists and IPC_CREAT is on
+
+	semctl
+		DATA argument
+			variable for setting/storing semaphore metadata
+		
+		Type union semun
+			You have to declare this union in your main.c file on linux machines.
+	
+		union semun{
+			int val;
+			stuct semid_ds *array;
+			unsigned shrot *array;
+			struct seminfo *__buf;
+		};
+
+
+		smepy*c9 L 1 - 
+
+	semop(preform an atmoic semaphore orperations)
+		you can Up/Down a semaphore by any integer value not just 1
+
+1		semop( <DESCRITOR, OPERATION,> AmOUNT
+		
+		Amount
+			)
