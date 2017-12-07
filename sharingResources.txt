@@ -82,7 +82,25 @@ Semaphores in C
 	semop(preform an atmoic semaphore orperations)
 		you can Up/Down a semaphore by any integer value not just 1
 
-1		semop( <DESCRITOR, OPERATION,> AmOUNT
+		semop( <DESCRITOR, OPERATION,> <AMOUNT>)
+			
+		struct sembuf{
+			short sem_op;
+			short sem_num;
+			short sen_flag;
+		}
 		
-		Amount
-			)
+		
+			sem_num
+				The index of the semaphore you want to work on
+
+			sem_op
+				Down(S): Any negative number
+	
+				Up(S): Any positive number
+
+				0: Block until the semaphore reaches 0
+
+		sem_flag
+
+			SEM_UNDO:
