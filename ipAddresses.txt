@@ -1,0 +1,15 @@
+IP Addresses
+
+	All devices connected to the internet have an IP address.
+
+	IP addresses come in 2 flavors, IPv4 and IPv6.
+
+	Addresses are allocated in blocks to make routing easier.
+
+		IPv4: 4 byte addresses of the form:
+
+			[0-255].[0-255].[0-255].[0-255]
+				
+			Each group is called an octet
+
+			At most there are 2^32, or ~4.3 billion IPv4 addresses

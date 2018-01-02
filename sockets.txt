@@ -1,0 +1,13 @@
+Socket
+	A connection between 2 programs over a network.
+	
+	A socket corresponds to an IP (internet protocol) Address / Port pair.
+		
+	To use a socket
+		1. create the socket
+
+		2. bind it to an address and port
+
+		3. listen/initiate a connection
+
+		4. send/receive data
