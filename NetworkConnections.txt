@@ -1,0 +1,21 @@
+Network Connection Types
+
+	Stream Sockets
+
+		Reliable 2 way communication.
+
+		Must be connected on both ends.
+
+		Data received in the order it is sent. (not as easily done as it sounds)
+
+		Most use the Transmission Control Protocol (TCP).
+
+	Datagram Sockets
+
+		"Connectionless" - an established connection is not required.
+
+		Data sent may be recieve out of order (or not at all).
+
+		Use the User Datagram Protocol
+
+	
