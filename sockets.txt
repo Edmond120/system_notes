@@ -11,3 +11,96 @@ Socket
 		3. listen/initiate a connection
 
 		4. send/receive data
+
+socket <sys/socket.h>
+
+	Creates a socket
+
+	Returns a socket descriptor (int that works like a file descriptor)
+
+	socket(domain, type, protocol)
+
+		domain: type of address
+			AF_INET or AF_INET6
+
+		type
+			SOCK_STREAM or SOCK_DGRAM
+
+		protocol
+			Combination of domain and type settings
+	
+			If set to 0 the OS will set to correct protocol (TCP or UDP)
+
+	example:
+		int sd = socket(AF_INET, SOCK_STREAM, 0);
+
+System library calls use a struct addrinfo to represent network addresses (containing
+information like IP address, port, protocol...)
+
+	struct addrinfo
+
+		.ai_family
+			AF_INET: IPv4
+			AF_INET6: IPv6
+			AF_UNSPEC: IPv4 or IPv6
+
+		.ai_socktype
+			SOCK_STREAM
+			SOCK_DGRAM
+
+		.ai_flags
+			AI_PASSIVE: Automaticaly set to any incoming IP address.
+
+		.ai_addr
+			Pointer to a struct sockaddr containing the IP address.
+		
+		.ai_addrlen
+			Size of the address in bytes.
+
+	getaddrinfo <sys/types.h> <sys/socket.h> <netdb.h>
+
+		Lookup information about the desired network address and get one or more
+		matching struct addrinfo entries
+
+		getaddrinfo(node, service, hints, results);
+			
+			node
+				String containing an IP address or hostname to lookup
+		
+				If NULL, use the local machine's IP address
+
+			service
+				String with a port number or service name (if the service is in
+				/etc/services)
+
+			hints
+				Pointer to a struct addrinfo used to provide settings for the lookup
+				(type of address, etc.)
+
+			results
+				Pointer to a struct addrinfo that wil be linked list containing entries
+				for each matching address.
+
+
+	struct addrinfo{
+		int ai_flags;
+		int ai_family;
+		int ai_socktype;
+		int ai_protocol;
+		socklen_t ad_addrlen;
+		struct sockaddr *ai_addr;
+		char *ai_cannonname;
+		struct addrinfo *ai_next;
+	}
+
+	Using getaddrinfo
+		struct addrinfo * hints, * results;
+		hints = (struct addrinfo *)calloc(1,sizeof(addrinfo));
+		hints-> ai_family = AF_INET;
+		hints-> ai_flags = 
+
+bind (server only) <sys/socket.h>
+
+	Binds the socket to and address and port
+	
+	Returns 0 (success, or -1 a failure)		
