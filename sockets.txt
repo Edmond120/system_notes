@@ -79,8 +79,14 @@ information like IP address, port, protocol...)
 
 			results
 				Pointer to a struct addrinfo that wil be linked list containing entries
-				for each matching address.
+				for each matching addre
+accept (server only) <sys/socket.h>
 
+	Accept the next client in the queue of a socket in the listen state.
+
+	Used for stream sockets.
+
+	Performs the server side of the 3 way handshake 
 
 	struct addrinfo{
 		int ai_flags;
@@ -104,3 +110,76 @@ bind (server only) <sys/socket.h>
 	Binds the socket to and address and port
 	
 	Returns 0 (success, or -1 a failure)		
+
+	int bind (socket descriptor, address, addresslength)
+
+	socket descriptor : return value of socket
+
+listen (server only) <sys/socket.h>
+
+	Set a socket to passively await a connection,
+	
+	Needed for stream sockets.
+
+	Does not block.
+
+	listen (socket descriptor, backlog)
+
+		socket descriptor
+			return value of socket
+
+		backlog
+			Number of connections that can be queued up
+
+			Depending on the protocol, this may not do much
+
+accept (server only) <sys/socket.h>
+
+	Accept the next client in the queue of a socket in the listen state.
+
+	Used for stream sockets.
+
+	Performs the server side of the 3 way handshake
+
+	Creates a new socket for communicating with the client, the listening socket is not modified.
+
+	Returns a descriptor to the new socket
+
+	Blocks until a connection attempt is made
+
+	accept(socket descriptor, address, address length)
+
+	socket descirptor:
+		descriptor for the listening docket
+
+	address
+		poitner to a struct sockaddr_storage that will contain information about the new socket 
+		after accept successds.
+
+	address length
+		Pointer to a variable that will contain the length of the socket address
+
+Using listen and accept
+
+	//create socket
+	int sd;
+	sd = socket(AF_INET, SOCK_STREAM,0);
+	//use getaddrinfo and bind
+
+	listen(sdm,10);
+
+	int client_socket;
+	socklen_t sock_size;
+	struct sockaddr_storage client_address;
+
+	client_socket = accept(sd, (struct sockaddr *) &client_address, &sock_size);
+
+connect (client only) <sys/socket.h> <sys/types.h>
+
+	Used for stream clouds
+	
+		Performs the client side of the 3 way handshake
+
+	Binds until a connecton 
+
+
