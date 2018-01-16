@@ -131,3 +131,47 @@ Link Layer
 
 						header checksum: only a checksum of the header, not the full
 											packet
+
+						IPv4 Packet format
+	
+							header source destination data
+							12B		4B		4B
+
+							source & destination: IPv4 addresses
+
+							data: MTU is 65,535 Bytes
+
+			Routing
+
+				Routers may break IPv4 packets fragments.
+
+				When a router receives a packet, it has 2 options:
+
+					1.Send that packet to the attached local network.
+
+					2. Forward that packet to a different router.
+
+			IPV4/IPv6 differences
+
+				Address space
+
+					2^32/2^128
+
+				Packet format
+
+					In addition to address size change, IPv6 packet headers have less
+					information. They do not include a checksum or fragment information.
+					
+				MTU
+					IPv6 can allot for an MTU of 2^32 (these are called jumbograms)
+
+				IPv6 puts more work onto Link layer devices and individual hosts
+				(computers)
+
+					IPv6 does not fragment packets at all, relying on other devices
+					to potentially take advantage of jumbograms
+
+					IPv6 has no checksum, assuming Link layer devices and hosts will
+					check for data integrity if needed.
+
+				
