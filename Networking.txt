@@ -175,3 +175,29 @@ Link Layer
 					check for data integrity if needed.
 
 				
+			Transport Layer
+
+				Computer to computer connection over a network.
+
+				Unconcerned with the invidiual hops of layer 3 traffic.
+
+				Network ports are used at the transport layer.
+
+				TCP and UDP are transport layer protocols. 
+
+			Application Layer
+
+				Everything else...
+			Transport Layer
+
+				Computer to computer connection over a network.
+
+				Unconcerned with the invidiual hops of layer 3 traffic.
+
+				Network ports are used at the transport layer.
+
+				TCP and UDP are transport layer protocols. 
+
+			Application Layer
+
+				Everything else...

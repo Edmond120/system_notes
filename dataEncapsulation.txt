@@ -1,0 +1,20 @@
+Data Encapsulation
+
+	As data crosses from an upper layer to a lower one, layer-specific metadata is added
+	to help aid transmission.
+
+		Application -> transport
+			UDP or TCP headers are added, including network port information.
+
+		Transport -> Network
+			Data (including Transport headers) is packaged into IP Packets.
+
+		Network -> Link
+			Packets (including IP and Transport headers) are packaged into Ethernet
+			Frames.
+
+Data decapsulation
+
+	When data crocesses back up a layer, the packaging for the lower layer is removed
+
+
